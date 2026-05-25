@@ -1,106 +1,107 @@
-# Portafolio — Rodrigo Santana
+# Portfolio — Rodrigo Santana
 
 > AI Engineer · Founding Engineer · Durango, MX
-> Mecatrónico convertido en AI Engineer. Disciplina de calidad automotriz (IATF 16949) aplicada a sistemas de producción con Claude · LangChain · FastAPI.
+> Mechatronics engineer turned AI Engineer. Automotive quality discipline (IATF 16949) applied to production systems with Claude · LangChain · FastAPI.
 
 ---
 
-## 📦 Contenido del proyecto
+## 📦 Project Content
 
-| Archivo | Descripción |
+| File | Description |
 |---|---|
-| **`Portfolio v2.html`** | Versión actual. Estética **CRT / terminal-phosphor** con boot overlay, command palette (⌘K), live ops widget, case studies con arquitectura SVG y timeline de experiencia. |
-| **`Portfolio v1.html`** | Primera iteración. Conservada como referencia y enlazada desde la sidebar de v2. |
-| **`Direction Memo.html`** | Memo de dirección de diseño — racional, mood, decisiones tipográficas y de color que llevaron a v2. |
-| **`uploads/`** | Recursos subidos (imágenes, materiales de referencia). |
+| **`Portfolio v2.html`** | Current version. **CRT / terminal-phosphor** aesthetic featuring a boot overlay, command palette (⌘K), live ops widget, case studies with SVG architecture, and an experience timeline. |
+| **`Portfolio v1.html`** | First iteration. Kept as a reference and linked from the v2 sidebar. |
+| **`Direction Memo.html`** | Design direction memo — rationale, mood, typography, and color decisions that led to v2. |
+| **`uploads/`** | Uploaded assets (images, reference materials). |
 
 ---
 
-## 🚀 Cómo abrirlo
+## 🚀 How to Open It
 
-Es HTML estático puro — no requiere build ni servidor.
+It is pure static HTML — no build step or server required.
 
 ```bash
-# opción 1 — abrir directo en el navegador
+# Option 1 — Open directly in the browser
 open "Portfolio v2.html"
 
-# opción 2 — servidor local (recomendado para que carguen las fuentes vía CDN sin warnings)
+# Option 2 — Local server (recommended so fonts load via CDN without warnings)
 python3 -m http.server 8000
 # → http://localhost:8000/Portfolio%20v2.html
 ```
 
-> Funciona offline una vez que el navegador cachea las Google Fonts (JetBrains Mono + Instrument Serif).
+> Works offline once the browser caches the Google Fonts (JetBrains Mono + Instrument Serif).
 
 ---
 
-## 🧱 Estructura de `Portfolio v2.html`
+## 🧱 Structure of `Portfolio v2.html`
 
-Una sola página, scroll vertical, dividida en secciones ancladas:
+A single page with vertical scrolling, divided into anchored sections:
 
-1. **Hero** — `whoami`, titular grande, proof bar (9+ apps, 1.8K SKUs, 100% precision) y live-ops widget de la derecha.
-2. **`// 01` Metrics that matter** — 4 stat cards con sparklines.
-3. **`// differentiator` The unfair advantage** — el pitch en una frase.
-4. **`// 02` Case studies** — tres proyectos con bloques **context / decision / architecture / impact**, war-log, métrica hero y diagrama SVG:
+1. **Hero** — `whoami`, large headline, proof bar (9+ apps, 1.8K SKUs, 100% precision), and the live-ops widget on the right.
+2. **`// 01` Metrics that matter** — 4 stat cards with sparklines.
+3. **`// differentiator` The unfair advantage** — the pitch in a single sentence.
+4. **`// 02` Case studies** — three projects featuring **context / decision / architecture / impact** blocks, a war-log, a hero metric, and an SVG diagram:
    - Axionix POS (multi-tenant SaaS)
-   - QIR & 8D (Yazaki — plataforma interna de calidad automotriz)
-   - Watson ML Classifier (Decision Tree, 100% precision en sensores de corriente)
-5. **`// 03` Stack** — matriz de skills en 3 columnas (AI/LLM · Backend · Frontend/Infra) con barras de dominio.
+   - QIR & 8D (Yazaki — internal automotive quality platform)
+   - Watson ML Classifier (Decision Tree, 100% precision on current sensors)
+5. **`// 03` Stack** — skill matrix in 3 columns (AI/LLM · Backend · Frontend/Infra) with proficiency bars.
 6. **`// 04` Experience** — timeline (Axionix · Yazaki · M.Sc. AI Tecmilenio).
-7. **Contact** — CTA final + footer con build info.
+7. **Contact** — final CTA + footer with build info.
 
 ---
 
-## 🎨 Sistema visual
+## 🎨 Visual System
 
-| Token | Valor | Uso |
+| Token | Value | Use |
 |---|---|---|
-| `--bg` | `#0a0d0c` | Fondo base (verde-negro muy oscuro) |
-| `--phosphor` | `#4ade80` | Acento principal — verde fósforo CRT |
-| `--amber` | `#fbbf24` | Acento secundario · branches, war-logs |
-| `--ink` | `#d6e0dc` | Texto principal |
-| `--ink-dim` / `--ink-faint` | `#8a9a94` / `#4a5854` | Jerarquía secundaria |
-| `--mono` | JetBrains Mono | Cuerpo, UI, código |
-| `--serif` | Instrument Serif italic | Títulos, números grandes, hero |
+| `--bg` | `#0a0d0c` | Base background (very dark green-black) |
+| `--phosphor` | `#4ade80` | Main accent — CRT phosphor green |
+| `--amber` | `#fbbf24` | Secondary accent · branches, war-logs |
+| `--ink` | `#d6e0dc` | Main text |
+| `--ink-dim` / `--ink-faint` | `#8a9a94` / `#4a5854` | Secondary hierarchy |
+| `--mono` | JetBrains Mono | Body, UI, code |
+| `--serif` | Instrument Serif italic | Headings, large numbers, hero |
 
-**Efectos ambientales:** scanlines CRT + grain SVG superpuestos (`body::before` / `body::after`), glow del cursor que sigue el mouse (`#ambient`), boot overlay al cargar, cursor parpadeante en el hero.
-
----
-
-## ⌨️ Interacciones
-
-- **⌘K / Ctrl+K** — abre command palette (navegación rápida + acciones).
-- **`/`** — atajo de búsqueda (sugerido en el hero).
-- **Scroll** — la sidebar resalta la sección activa.
-- **Hover en case study** — el SHA del commit y los stats `+/−` cobran vida.
-- **Live ops widget** — sparkline de p95 latency animado con datos sintéticos.
+**Environmental effects:** CRT scanlines + SVG grain overlays (`body::before` / `body::after`), a cursor glow that follows the mouse (`#ambient`), a boot overlay on load, and a blinking cursor in the hero.
 
 ---
 
-## 🛠️ Personalizar
+## ⌨️ Interactions
 
-Todo el contenido vive **inline** en cada `.html` (un solo archivo por versión). Para editar:
-
-- **Texto / proyectos** → buscar `<article class="project">` y `<div class="tl-item">`.
-- **Métricas** → bloque `.stats-grid` (sección `#stats`).
-- **Skills** → matriz `.skills-matrix`.
-- **Colores** → tokens `:root { --... }` en el `<style>` superior.
-- **Tipografía** → cambiar el `<link>` de Google Fonts + las variables `--mono` / `--serif`.
-- **Status / disponibilidad** → marquee `.hire-strip` + sidebar `// status`.
+- **⌘K / Ctrl+K** — opens the command palette (quick navigation + actions).
+- **`/`** — search shortcut (suggested in the hero).
+- **Scroll** — the sidebar highlights the active section.
+- **Hover on case study** — the commit SHA and `+/−` stats come to life.
+- **Live ops widget** — animated p95 latency sparkline using synthetic data.
 
 ---
 
-## 🧭 Filosofía
+## 🛠️ Customization
+
+All content lives **inline** within each `.html` file (a single file per version). To edit:
+
+- **Text / projects** → search for `<article class="project">` and `<div class="tl-item">`.
+- **Metrics** → `.stats-grid` block (`#stats` section).
+- **Skills** → `.skills-matrix` grid.
+- **Colors** → `:root { --... }` tokens in the top `<style>`.
+- **Typography** → change the Google Fonts `<link>` + the `--mono` / `--serif` variables.
+- **Status / availability** → `.hire-strip` marquee + `// status` sidebar.
+
+---
+
+## 🧭 Philosophy
 
 > Most AI engineers can wrap an LLM. Few have shipped under IATF 16949 supplier governance.
 
-El portafolio está diseñado para que la primera impresión comunique **rigor de ingeniero**, no slop de IA: terminal estética, métricas reales, war-logs honestos, diagramas que parecen documentación interna. Cada case study sigue la estructura **context → decision → impact** — el formato con el que se escriben los 8D en planta.
+The portfolio is designed so that the first impression communicates **engineering rigor**, not AI slop: terminal aesthetics, real metrics, honest war-logs, and diagrams that look like internal documentation. Each case study follows the **context → decision → impact** structure — the exact format used to write 8Ds on the manufacturing plant floor.
 
 ---
 
-## 📮 Contacto
+## 📮 Contact
 
-Ver sección final del portafolio o sidebar (`// external`). Abierto a roles remotos como **AI Engineer / Founding Engineer**.
+See the final section of the portfolio or the sidebar (`// external`). Open to remote roles as an **AI Engineer / Founding Engineer**.
+rodrigostorrecillas.netlify.app
 
 ---
 
-*Build: HTML estático · cero dependencias de runtime · servido como archivo plano.*
+*Build: Static HTML · zero runtime dependencies · served as a flat file.*
