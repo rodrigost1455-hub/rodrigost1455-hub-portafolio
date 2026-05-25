@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Direction Memo — Portfolio v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0d0c;
+      --bg-1: #0f1313;
+      --bg-2: #161b1a;
+      --bg-3: #1c2422;
+      --line: #1f2826;
+      --line-bright: #2d3a37;
+      --ink: #d6e0dc;
+      --ink-dim: #8a9a94;
+      --ink-faint: #4a5854;
+      --phosphor: #4ade80;
+      --phosphor-dim: #166534;
+      --amber: #fbbf24;
+      --red: #f87171;
+      --cyan: #67e8f9;
+      --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+      --serif: 'Instrument Serif', 'Times New Roman', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      background-image:
+        linear-gradient(rgba(74, 222, 128, .025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74, 222, 128, .025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: -1px -1px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, .012) 0, rgba(255, 255, 255, .012) 1px, transparent 1px, transparent 3px);
+      z-index: 1000;
+      mix-blend-mode: overlay;
+    }
+
+    ::selection {
+      background: var(--phosphor);
+      color: var(--bg)
+    }
+
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 80px 32px 120px;
+    }
+
+    /* Header */
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .top .badge {
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--phosphor);
+      border: 1px solid var(--phosphor-dim);
+      padding: 4px 10px;
+    }
+
+    .top .meta {
+      margin-left: auto;
+      color: var(--ink-faint);
+      font-size: 11px;
+    }
+
+    .top .meta b {
+      color: var(--ink-dim);
+      font-weight: 500;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(48px, 7vw, 84px);
+      line-height: .98;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin: 8px 0 16px;
+    }
+
+    h1 .green {
+      color: var(--phosphor);
+    }
+
+    .lede {
+      font-family: var(--serif);
+      font-style: normal;
+      font-size: 22px;
+      line-height: 1.45;
+      color: var(--ink-dim);
+      max-width: 720px;
+      margin-bottom: 8px;
+    }
+
+    .lede em {
+      color: var(--ink);
+      font-style: italic;
+    }
+
+    .nav-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 32px 0 56px;
+    }
+
+    .nav-bar a {
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--ink-dim);
+      border: 1px solid var(--line);
+      padding: 8px 12px;
+      transition: all .15s;
+    }
+
+    .nav-bar a:hover {
+      color: var(--phosphor);
+      border-color: var(--phosphor-dim);
+      background: var(--bg-1);
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 38px;
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 64px 0 8px;
+    }
+
+    .h2-tag {
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--phosphor);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    h3 {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 28px 0 8px;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    h3 .num {
+      color: var(--phosphor);
+      margin-right: 8px;
+    }
+
+    p {
+      color: var(--ink-dim);
+      margin: 8px 0 14px;
+    }
+
+    p strong,
+    li strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    p em,
+    li em {
+      color: var(--phosphor);
+      font-style: normal;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--ink-dim);
+      margin: 6px 0;
+    }
+
+    ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--phosphor);
+    }
+
+    code {
+      font-family: var(--mono);
+      background: var(--bg-2);
+      color: var(--cyan);
+      padding: 1px 6px;
+      border: 1px solid var(--line);
+      font-size: 12px;
+    }
+
+    /* Verdict card */
+    .verdict {
+      border: 1px solid var(--phosphor-dim);
+      background: linear-gradient(180deg, rgba(74, 222, 128, .04), transparent 60%), var(--bg-1);
+      padding: 28px 32px;
+      margin: 32px 0 8px;
+    }
+
+    .verdict .label {
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--phosphor);
+    }
+
+    .verdict p {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--ink);
+      margin-top: 10px;
+      line-height: 1.45;
+    }
+
+    /* Roadmap */
+    .roadmap {
+      border: 1px solid var(--line);
+      margin-top: 24px;
+    }
+
+    .lane {
+      display: grid;
+      grid-template-columns: 120px 1fr 110px;
+      border-bottom: 1px solid var(--line);
+      align-items: stretch;
+    }
+
+    .lane:last-child {
+      border-bottom: none;
+    }
+
+    .lane .tier {
+      background: var(--bg-1);
+      border-right: 1px solid var(--line);
+      padding: 16px 18px;
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      justify-content: flex-start;
+    }
+
+    .lane .tier b {
+      color: var(--phosphor);
+      font-size: 22px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .lane .items {
+      padding: 14px 20px;
+    }
+
+    .lane .items div {
+      padding: 6px 0;
+      color: var(--ink-dim);
+      font-size: 12.5px;
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .lane .items div::before {
+      content: '·';
+      color: var(--phosphor);
+      position: absolute;
+      left: 8px;
+      font-weight: 700;
+    }
+
+    .lane .items div b {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .lane .effort {
+      background: var(--bg-1);
+      border-left: 1px solid var(--line);
+      padding: 16px 16px;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+
+    /* Two-column */
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin: 16px 0 8px;
+    }
+
+    .col {
+      border: 1px solid var(--line);
+      padding: 20px 22px;
+      background: var(--bg-1);
+    }
+
+    .col h4 {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .col.bad h4 {
+      color: var(--red);
+    }
+
+    .col.good h4 {
+      color: var(--phosphor);
+    }
+
+    .col ul li::before {
+      color: inherit;
+    }
+
+    .col.bad ul li::before {
+      content: '×';
+      color: var(--red);
+    }
+
+    .col.good ul li::before {
+      content: '✓';
+      color: var(--phosphor);
+    }
+
+    /* Anchor decoration */
+    .anchor {
+      display: inline-block;
+      color: var(--ink-faint);
+      margin-right: 8px;
+      font-size: 11px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-faint);
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--ink-dim);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--phosphor);
+    }
+
+    @media (max-width: 720px) {
+      .two {
+        grid-template-columns: 1fr;
+      }
+
+      .lane {
+        grid-template-columns: 1fr;
+      }
+
+      .lane .tier,
+      .lane .effort {
+        border-right: none;
+        border-left: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="top">
+      <span class="badge">● Direction Memo</span>
+      <span style="color:var(--ink-faint); font-size:11px;">/memo/rodrigo-v2.md</span>
+      <span class="meta">From: creative director · To: <b>rodrigo</b> · Re: <b>portfolio v2</b></span>
+    </div>
+
+    <span class="h2-tag">// brief</span>
+    <h1>You already shipped<br />a <span class="green">good</span> portfolio.<br />Let's make it <em>undeniable</em>.
+    </h1>
+
+    <p class="lede">V1 reads as a competent terminal-style site. <em>Competent</em> doesn't convert recruiters at the
+      YC-adjacent shops you want — they see fifty of these a week. V2 keeps the hacker DNA, but layers in the three
+      things that actually move the needle: <em>cinematic hero</em>, <em>case-study depth</em>, and <em>live, premium
+        motion</em>.</p>
+
+    <div class="nav-bar">
+      <a href="Portfolio v1.html">↗ open v1 (current)</a>
+      <a href="index.html">↗ open v2 (proposed build)</a>
+      <a href="#verdict">↓ verdict</a>
+      <a href="#hero">↓ hero</a>
+      <a href="#projects">↓ projects</a>
+      <a href="#motion">↓ motion</a>
+      <a href="#roadmap">↓ roadmap</a>
+    </div>
+
+    <!-- ================= VERDICT ================= -->
+    <span class="h2-tag" id="verdict">// the call</span>
+    <h2>Verdict in one paragraph.</h2>
+    <div class="verdict">
+      <div class="label">★★★★☆ → ★★★★★ blockers</div>
+      <p>V1 is <em>aesthetically</em> finished but <em>narratively</em> thin. The hero asserts seniority but doesn't
+        prove it on first scroll. Projects are described, not <em>argued</em>. Motion is decorative, not
+        <em>diegetic</em>. Fix those three and you stop competing with junior portfolios and start competing with
+        founder profiles.</p>
+    </div>
+
+    <div class="two">
+      <div class="col good">
+        <h4>// keep — already on brand</h4>
+        <ul>
+          <li><strong>Type pairing.</strong> Instrument Serif + JetBrains Mono is the right move for 2026 —
+            Anthropic-coded, not template-coded.</li>
+          <li><strong>Phosphor palette.</strong> Resist any urge to add a second accent hue. One color, used sparingly,
+            reads senior.</li>
+          <li><strong>CRT/scanline overlay.</strong> Subtle, identity-defining. Keep.</li>
+          <li><strong>Stat-grid + skill-dot matrix.</strong> Strong scannable structure for recruiters.</li>
+          <li><strong>Status-bar chrome.</strong> Real, not cosplay. Keep clock + git path.</li>
+        </ul>
+      </div>
+      <div class="col bad">
+        <h4>// cut or rework</h4>
+        <ul>
+          <li><strong>Hero h1 only.</strong> No proof, no live signal, no CTA. Below-the-fold ATS bait.</li>
+          <li><strong>Project cards.</strong> They <em>list</em> projects. Recruiters can't see <strong>how</strong> you
+            think.</li>
+          <li><strong>ASCII art block.</strong> Decorative, not informative. Replace with a real architecture diagram.
+          </li>
+          <li><strong>Generic CTA.</strong> "Hiring for an AI Engineer?" is template-tier — make it sharper.</li>
+          <li><strong>Decorative animations only.</strong> Fade-in is 2018. Need diegetic motion that <em>signals
+              competence</em>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ================= HERO ================= -->
+    <span class="h2-tag" id="hero">// section 01</span>
+    <h2>The hero is the entire pitch.</h2>
+    <p>Recruiters give you <em>5 seconds</em>. The hero must, in that window, communicate: <strong>(a)</strong> you ship
+      production AI, <strong>(b)</strong> you are <em>different</em> from every other LLM-wrapper portfolio,
+      <strong>(c)</strong> you are available <em>now</em>.</p>
+
+    <h3><span class="num">→</span> typography</h3>
+    <ul>
+      <li>Push h1 to <code>clamp(72px, 11vw, 144px)</code>. <strong>Bigger than feels right.</strong> Confidence is a
+        layout choice.</li>
+      <li>Two-line h1 with the second line <em>italic + phosphor</em>: <code>I ship</code> / <em>production AI.</em>
+      </li>
+      <li>Add a serif sub-lede underneath (not mono) — breaks the wall of monospace and signals editorial control.</li>
+    </ul>
+
+    <h3><span class="num">→</span> live system panel (right column)</h3>
+    <ul>
+      <li>Replace the static ASCII box with a <strong>live "ops" widget</strong> — animated request-rate sparkline
+        (<code>claude_api.latency</code>), uptime counter that <em>actually ticks</em>, region tag
+        (<code>mx-north</code>).</li>
+      <li>Show <strong>2 production endpoints</strong> with green <code>200 OK</code> pings every ~3s. It's theatre —
+        but it's <em>true</em> theatre: you do operate live services.</li>
+      <li>The widget should look <em>identical</em> to a Grafana panel a hiring manager already reads at work.</li>
+    </ul>
+
+    <h3><span class="num">→</span> proof bar (above the fold)</h3>
+    <ul>
+      <li>Slim row directly under h1: <code>9+ apps in prod · 1.8K SKUs migrated · 100% precision on Watson ML</code>.
+      </li>
+      <li>Each metric clickable → jumps to its case study. Recruiters scan, click, convert.</li>
+    </ul>
+
+    <h3><span class="num">→</span> two real CTAs above the fold</h3>
+    <ul>
+      <li>Primary: <code>$ hire rodrigo</code> — phosphor pill, opens contact.</li>
+      <li>Secondary: <code>$ cat cv.pdf</code> — outline pill, downloads CV.</li>
+      <li>Tertiary hint: <code>press / to search</code> — invites the command palette (see Motion).</li>
+    </ul>
+
+    <!-- ================= PROJECTS ================= -->
+    <span class="h2-tag" id="projects">// section 02</span>
+    <h2>Cards must become case studies.</h2>
+    <p>Right now a project is one paragraph + tags. That's a <em>résumé bullet</em>. To convert at YC-adjacent shops,
+      each project needs the four-beat structure every senior engineer recognises on sight:</p>
+    <ul>
+      <li><strong>Context</strong> — what was broken, in one sentence.</li>
+      <li><strong>Decision</strong> — the engineering trade-off you owned (<em>not</em> "I used FastAPI").</li>
+      <li><strong>Architecture</strong> — a real diagram, not ASCII art.</li>
+      <li><strong>Impact</strong> — a number with a unit. Time saved, SKUs moved, latency cut.</li>
+    </ul>
+
+    <h3><span class="num">→</span> the architecture diagram</h3>
+    <ul>
+      <li>Inline <strong>SVG</strong>, terminal-styled: hairline boxes, dashed connectors, phosphor labels on the wire.
+      </li>
+      <li>Each box reads as a <code>service:port</code> — <code>fastapi:8000</code>, <code>postgres:5432</code>,
+        <code>claude.anthropic.com</code>.</li>
+      <li>Animate the data flow with a <strong>traveling dot</strong> along each path — 4s loop. Hypnotic, technical,
+        <em>memorable</em>.</li>
+      <li>On hover a node, surface a <em>tooltip with the trade-off</em>: e.g.
+        <code>asyncpg → statement_cache_size=0 // pgbouncer compat fix</code>. That single hover state proves you've
+        debugged production.</li>
+    </ul>
+
+    <h3><span class="num">→</span> the metric block</h3>
+    <ul>
+      <li>One <em>hero metric</em> per project, set in serif italic at <code>72px</code>. <code>98% faster.</code>
+        <code>1.8K SKUs.</code> <code>100% precision.</code></li>
+      <li>Sparkline underneath, animated draw-in on viewport entry.</li>
+    </ul>
+
+    <h3><span class="num">→</span> the "war story" pull-quote</h3>
+    <ul>
+      <li>One short paragraph per project styled as a terminal diff or <code>// log</code> block: the <em>moment it
+          broke</em>, the <em>moment it shipped</em>. This is the storytelling beat that converts engineers — they
+        recognise themselves.</li>
+      <li>Example for Axionix:
+        <code>// 3 a.m. — asyncpg crashes on every prepared statement behind pgbouncer. fix: statement_cache_size=0. ship.</code>
+      </li>
+    </ul>
+
+    <h3><span class="num">→</span> visual differentiation per project</h3>
+    <ul>
+      <li>Axionix POS → <em>multi-tenant network</em> diagram (tenants → router → core services).</li>
+      <li>Yazaki QIR → <em>workflow swimlane</em> (operator → engineer → admin → SLA timer).</li>
+      <li>Watson ML → <em>data pipeline</em> (TXT → parser → 34 features → DT → Watson endpoint → Next.js).</li>
+      <li>Three different diagram shapes = three different visual signatures. Stops the "this is all the same project"
+        effect.</li>
+    </ul>
+
+    <!-- ================= MOTION ================= -->
+    <span class="h2-tag" id="motion">// section 03</span>
+    <h2>Diegetic motion, not decoration.</h2>
+    <p>Linear, Vercel, Stripe, and Anthropic all share one motion principle: <em>animation must mean something</em>.
+      Fade-ins are over. Here's the motion set V2 ships with:</p>
+
+    <h3><span class="num">→</span> ambient cursor light</h3>
+    <ul>
+      <li>Soft <strong>radial phosphor gradient</strong> follows the cursor at <code>0.4 opacity</code>,
+        <code>screen</code> blend mode, <code>480px</code> diameter.</li>
+      <li>Makes the entire page feel <em>lit by your attention</em>. Costs ~3 lines of JS.</li>
+    </ul>
+
+    <h3><span class="num">→</span> command palette (Cmd/Ctrl-K, or "/")</h3>
+    <ul>
+      <li>Linear-style modal. <code>jump to projects</code>, <code>copy email</code>, <code>open axionix.app</code>,
+        <code>download cv</code>, <code>toggle CRT</code>.</li>
+      <li>Arrow-key nav, <code>↵</code> to execute. <strong>Sells your seniority before they read a single
+          project.</strong></li>
+    </ul>
+
+    <h3><span class="num">→</span> boot sequence (first visit only)</h3>
+    <ul>
+      <li>~1.4s overlay: terminal types <code>$ boot rodrigo.santana@ai-engineer</code> →
+        <code>[ok] services healthy</code> → fades. <strong>Skips on return</strong> (localStorage).</li>
+      <li>Never make this longer. Never replay. Recruiters bounce on long intros.</li>
+    </ul>
+
+    <h3><span class="num">→</span> data-flow dots on every architecture diagram</h3>
+    <ul>
+      <li><code>offset-path</code> on SVG paths, <code>animation: flow 4s linear infinite</code>. Subtle, technical,
+        on-theme.</li>
+    </ul>
+
+    <h3><span class="num">→</span> hover states with meaning</h3>
+    <ul>
+      <li>Project cards: hairline border brightens, the <em>file path in the header changes</em> from
+        <code>main.py</code> to <code>README.md</code> — telegraphs "click for the full story".</li>
+      <li>Skill rows: hover a tech tag, the entire <em>column</em> of related tags lights up. Shows the cluster.</li>
+      <li>CTAs: cursor enters → small <code>▍</code> caret appears next to the label, as if you'd just clicked into a
+        terminal.</li>
+    </ul>
+
+    <h3><span class="num">→</span> scroll-driven reveal (selective)</h3>
+    <ul>
+      <li>Only architecture diagrams and hero metrics get reveal animations. Everything else is static. <em>Restraint
+          reads as senior.</em></li>
+    </ul>
+
+    <!-- ================= AESTHETIC ================= -->
+    <span class="h2-tag">// section 04</span>
+    <h2>Premium AI aesthetic, not SaaS slop.</h2>
+    <p>The line between "AI infra company" and "SaaS template" is thin. Things that cross it:</p>
+    <ul>
+      <li><strong>Zero border-radius.</strong> Sharp corners on every card, button, badge. Rounded = consumer SaaS.
+        Sharp = infra.</li>
+      <li><strong>One accent colour, used surgically.</strong> Phosphor on numbers, dots, paths, hover states. Never on
+        body text.</li>
+      <li><strong>Hairline borders (1px solid #1f2826).</strong> Brighter on hover. Never thick, never colored.</li>
+      <li><strong>Dotted-leader rules between metadata rows.</strong> Like Bloomberg, like a Stripe invoice, like an
+        Anthropic doc.</li>
+      <li><strong>No glassmorphism. No gradient meshes. No 3D blobs.</strong> If V2 has any gradient, it's the cursor
+        glow and the section-end fade — nowhere else.</li>
+      <li><strong>Editorial italics.</strong> Use Instrument Serif italic for the <em>one phrase per section</em> that
+        carries the argument. Anthropic does this constantly; it's why their docs read smart.</li>
+    </ul>
+
+    <!-- ================= CONVERSION ================= -->
+    <span class="h2-tag">// section 05</span>
+    <h2>Conversion engineering.</h2>
+    <p>Three high-leverage changes that make hiring a one-click decision:</p>
+    <ul>
+      <li><strong>Hireability strip at top of page</strong> — slim, phosphor-bordered:
+        <code>● open to work · remote global · ai engineer · 30-day notice · response &lt; 24h</code>. Recruiters need
+        this in the first 5 seconds.</li>
+      <li><strong>"Why hire me" pull-quote</strong> before projects. Three sentences max. <em>Production-shipped LLM
+          systems + automotive-grade quality discipline = engineers who can be trusted with regulated workloads.</em>
+        Make the differentiator explicit.</li>
+      <li><strong>End-of-page CTA, not contact form.</strong> Two buttons: <code>$ email rodrigo</code> +
+        <code>$ schedule 20min call</code> (Calendly). <em>Forms lose. Calendly converts.</em></li>
+    </ul>
+
+    <!-- ================= MOBILE ================= -->
+    <span class="h2-tag">// section 06</span>
+    <h2>Mobile = first impression.</h2>
+    <p>Half your traffic is recruiters tapping a LinkedIn link on their phone in a meeting. The current mobile collapse
+      <em>works</em> but doesn't feel premium.</p>
+    <ul>
+      <li>Replace the sidebar with a <strong>sticky bottom dock</strong> on mobile — three buttons, terminal-styled:
+        <code>menu</code>, <code>contact</code>, <code>cv</code>.</li>
+      <li>Collapse the live ops widget into a single ticker line under the hero on mobile — keeps the signal, drops the
+        bulk.</li>
+      <li>Architecture diagrams: <code>overflow-x: auto</code> with a phosphor scroll hint on the right edge. Don't
+        squish them.</li>
+      <li>Increase mobile font baseline to 15px. The current 14px is too tight for fast scanning on a phone.</li>
+    </ul>
+
+    <!-- ================= ROADMAP ================= -->
+    <span class="h2-tag" id="roadmap">// the plan</span>
+    <h2>Prioritised implementation roadmap.</h2>
+    <p>Ranked by recruiter-conversion impact per hour of work. Ship in order. <strong>P0 already lives in
+        <code><a href="Portfolio v2.html" style="color:var(--phosphor);text-decoration:none;border-bottom:1px dashed var(--phosphor-dim)">Portfolio v2.html</a></code>.</strong>
+    </p>
+
+    <div class="roadmap">
+
+      <div class="lane">
+        <div class="tier"><span>tier</span><b>P0</b><span>ship today</span></div>
+        <div class="items">
+          <div><b>Cinematic hero rebuild.</b> Bigger type, live ops widget, proof bar, two CTAs.</div>
+          <div><b>Case-study restructure.</b> Context / Decision / Architecture / Impact for every project.</div>
+          <div><b>Inline SVG architecture diagrams</b> per project, with animated data-flow dots.</div>
+          <div><b>Ambient cursor light</b> + <b>boot sequence</b> (first visit, &lt;1.4s).</div>
+          <div><b>Hireability strip</b> at top + sharpened end CTA with Calendly.</div>
+        </div>
+        <div class="effort">~1 day</div>
+      </div>
+
+      <div class="lane">
+        <div class="tier"><span>tier</span><b>P1</b><span>this week</span></div>
+        <div class="items">
+          <div><b>Command palette</b> (Cmd-K / "/") with 6–8 quick actions.</div>
+          <div><b>Per-project war-story log</b> blocks (the 3 a.m. moments).</div>
+          <div><b>Hover-cluster skills matrix</b> — column highlights on tag hover.</div>
+          <div><b>Mobile sticky dock</b> + ticker variant of the ops widget.</div>
+          <div><b>Sparkline metrics</b> with viewport-entry draw-in.</div>
+        </div>
+        <div class="effort">~1 day</div>
+      </div>
+
+      <div class="lane">
+        <div class="tier"><span>tier</span><b>P2</b><span>nice to have</span></div>
+        <div class="items">
+          <div><b>Theme toggle</b> — phosphor / amber / cyan accent. Cycles the brand.</div>
+          <div><b>"Now playing" footer</b> — what you're shipping this week, auto-pulled.</div>
+          <div><b>Public commits widget</b> in the ops panel — last 5 GitHub commits with phosphor age stamps.</div>
+          <div><b>Project deep-link routes</b> (<code>/projects/axionix</code>) so recruiters can share a single case
+            study.</div>
+          <div><b>Konami code easter egg</b> → opens a hidden CLI with <code>cat ~/dotfiles</code>,
+            <code>ls /skills</code>, etc.</div>
+        </div>
+        <div class="effort">~2 days</div>
+      </div>
+
+      <div class="lane">
+        <div class="tier"><span>tier</span><b>P3</b><span>if you're feeling cinematic</span></div>
+        <div class="items">
+          <div><b>WebGL ambient grid</b> on hero only — vertices light up near cursor. Strictly &lt;30kb. Skip if perf
+            budget tight.</div>
+          <div><b>"Live" deploy log</b> at footer — fake `git log` stream of recent activity.</div>
+          <div><b>Audio cue</b> on command palette open. Off by default. Linear-tier polish.</div>
+        </div>
+        <div class="effort">~1 day</div>
+      </div>
+
+    </div>
+
+    <p style="margin-top:48px; font-family:var(--serif); font-size: 22px; line-height:1.45; color: var(--ink);">
+      Build the <em>P0 stack</em> first — you'll get 80% of the conversion lift from 30% of the work. Then iterate
+      weekly based on what recruiters actually click.
+    </p>
+
+    <p style="margin-top:8px;">— Open <a href="index.html"
+        style="color:var(--phosphor);text-decoration:none;border-bottom:1px dashed var(--phosphor-dim);">index.html</a>
+      for the implementation. The diff vs v1 is documented inline.</p>
+
+    <footer>
+      <div>memo · rev 1 · 2026-05-25 · creative direction</div>
+      <div><a href="Portfolio v1.html">↗ v1</a> &nbsp; · &nbsp; <a href="index.html">↗ v2</a></div>
+    </footer>
+
+  </div>
+</body>
+
+</html>
