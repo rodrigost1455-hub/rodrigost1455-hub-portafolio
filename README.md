@@ -1,78 +1,106 @@
-# Rodrigo Santana — AI Engineer Portfolio
+# Portafolio — Rodrigo Santana
 
-Portafolio personal estilo terminal/dashboard, single-file HTML. Cero dependencies, deploy en cualquier plataforma estática.
-
----
-
-## 🚀 Deploy rápido a Vercel
-
-```bash
-# Opción 1: con Vercel CLI
-npm i -g vercel
-vercel
-# → confirma el deploy, listo en ~10 segundos
-
-# Opción 2: arrastra y suelta
-# Ve a vercel.com/new → drag & drop esta carpeta
-```
-
-Para que tome dominio limpio (`rodrigosantana.dev` o similar):
-1. Compra el dominio (Namecheap / Cloudflare ~$12 USD/año)
-2. Vercel → Project → Settings → Domains → Add
-3. Apunta los DNS según las instrucciones de Vercel
-
-## 🐙 Deploy a GitHub Pages (gratis)
-
-```bash
-cd portfolio
-git init
-git add .
-git commit -m "feat: initial portfolio"
-git branch -M main
-git remote add origin https://github.com/rodrigost1455-hub/portfolio.git
-git push -u origin main
-```
-
-Luego en GitHub: **Settings → Pages → Source: main / root**. Live en `rodrigost1455-hub.github.io/portfolio`.
+> AI Engineer · Founding Engineer · Durango, MX
+> Mecatrónico convertido en AI Engineer. Disciplina de calidad automotriz (IATF 16949) aplicada a sistemas de producción con Claude · LangChain · FastAPI.
 
 ---
 
-## ✏️ Qué editar antes de publicar
+## 📦 Contenido del proyecto
 
-Abre `index.html` y busca/reemplaza:
+| Archivo | Descripción |
+|---|---|
+| **`Portfolio v2.html`** | Versión actual. Estética **CRT / terminal-phosphor** con boot overlay, command palette (⌘K), live ops widget, case studies con arquitectura SVG y timeline de experiencia. |
+| **`Portfolio v1.html`** | Primera iteración. Conservada como referencia y enlazada desde la sidebar de v2. |
+| **`Direction Memo.html`** | Memo de dirección de diseño — racional, mood, decisiones tipográficas y de color que llevaron a v2. |
+| **`uploads/`** | Recursos subidos (imágenes, materiales de referencia). |
 
-| Placeholder | Dónde está | Qué poner |
+---
+
+## 🚀 Cómo abrirlo
+
+Es HTML estático puro — no requiere build ni servidor.
+
+```bash
+# opción 1 — abrir directo en el navegador
+open "Portfolio v2.html"
+
+# opción 2 — servidor local (recomendado para que carguen las fuentes vía CDN sin warnings)
+python3 -m http.server 8000
+# → http://localhost:8000/Portfolio%20v2.html
+```
+
+> Funciona offline una vez que el navegador cachea las Google Fonts (JetBrains Mono + Instrument Serif).
+
+---
+
+## 🧱 Estructura de `Portfolio v2.html`
+
+Una sola página, scroll vertical, dividida en secciones ancladas:
+
+1. **Hero** — `whoami`, titular grande, proof bar (9+ apps, 1.8K SKUs, 100% precision) y live-ops widget de la derecha.
+2. **`// 01` Metrics that matter** — 4 stat cards con sparklines.
+3. **`// differentiator` The unfair advantage** — el pitch en una frase.
+4. **`// 02` Case studies** — tres proyectos con bloques **context / decision / architecture / impact**, war-log, métrica hero y diagrama SVG:
+   - Axionix POS (multi-tenant SaaS)
+   - QIR & 8D (Yazaki — plataforma interna de calidad automotriz)
+   - Watson ML Classifier (Decision Tree, 100% precision en sensores de corriente)
+5. **`// 03` Stack** — matriz de skills en 3 columnas (AI/LLM · Backend · Frontend/Infra) con barras de dominio.
+6. **`// 04` Experience** — timeline (Axionix · Yazaki · M.Sc. AI Tecmilenio).
+7. **Contact** — CTA final + footer con build info.
+
+---
+
+## 🎨 Sistema visual
+
+| Token | Valor | Uso |
 |---|---|---|
-| `mailto:rodrigo@example.com` | sección contact | tu email real |
-| `https://linkedin.com` (×2) | sidebar + contact | URL real de tu LinkedIn |
-| `/cv.pdf` | botón download cv | sube tu CV como `cv.pdf` en la raíz |
-| Métricas en `#stats` | sección 01 | ajusta números si quieres ser más conservador |
+| `--bg` | `#0a0d0c` | Fondo base (verde-negro muy oscuro) |
+| `--phosphor` | `#4ade80` | Acento principal — verde fósforo CRT |
+| `--amber` | `#fbbf24` | Acento secundario · branches, war-logs |
+| `--ink` | `#d6e0dc` | Texto principal |
+| `--ink-dim` / `--ink-faint` | `#8a9a94` / `#4a5854` | Jerarquía secundaria |
+| `--mono` | JetBrains Mono | Cuerpo, UI, código |
+| `--serif` | Instrument Serif italic | Títulos, números grandes, hero |
 
-## 🎨 Decisiones de diseño
-
-- **Estética**: CRT terminal + dashboard observability. Scanlines, noise grain, monoespaciada, accent phosphor verde (#4ade80).
-- **Tipografía**: JetBrains Mono (display + body) + Instrument Serif italic (headings) — combo que se lee como código pero respira con elegancia editorial.
-- **Layout**: sidebar fijo estilo IDE + área principal scrollable. Status bar superior con clock en vivo.
-- **Anti-AI-slop**: nada de gradientes morados, nada de Inter, nada de Tailwind defaults. Compromiso total con la estética.
-
-## 📁 Estructura
-
-```
-portfolio/
-├── index.html      # todo el portafolio, single-file
-├── cv.pdf          # ⚠️ tú lo agregas aquí
-└── README.md       # esto
-```
-
-## 🧠 Por qué cada sección está donde está
-
-1. **Hero** — pitch en 2 segundos: AI Engineer con backbone de quality engineering (tu unique angle).
-2. **Metrics** — números reales y verificables (98% faster, 1.8K SKUs, 100% precision). Antes de proyectos porque los reclutadores skiman.
-3. **Projects** — 3 case studies con problema → stack → impacto. Cada uno con badge `● production` o `● deployed` (anti-vaporware).
-4. **Stack** — matrix con dots de proficiencia, agrupado por dominio. AI/LLM primero (lo que estás vendiendo).
-5. **Experience** — timeline corto, dual (Axionix + Yazaki) + máster en curso.
-6. **Contact** — CTA directo: "I'm ready to ship", links a email/GitHub/LinkedIn/CV.
+**Efectos ambientales:** scanlines CRT + grain SVG superpuestos (`body::before` / `body::after`), glow del cursor que sigue el mouse (`#ambient`), boot overlay al cargar, cursor parpadeante en el hero.
 
 ---
 
-Built by Rodrigo Santana · 2026
+## ⌨️ Interacciones
+
+- **⌘K / Ctrl+K** — abre command palette (navegación rápida + acciones).
+- **`/`** — atajo de búsqueda (sugerido en el hero).
+- **Scroll** — la sidebar resalta la sección activa.
+- **Hover en case study** — el SHA del commit y los stats `+/−` cobran vida.
+- **Live ops widget** — sparkline de p95 latency animado con datos sintéticos.
+
+---
+
+## 🛠️ Personalizar
+
+Todo el contenido vive **inline** en cada `.html` (un solo archivo por versión). Para editar:
+
+- **Texto / proyectos** → buscar `<article class="project">` y `<div class="tl-item">`.
+- **Métricas** → bloque `.stats-grid` (sección `#stats`).
+- **Skills** → matriz `.skills-matrix`.
+- **Colores** → tokens `:root { --... }` en el `<style>` superior.
+- **Tipografía** → cambiar el `<link>` de Google Fonts + las variables `--mono` / `--serif`.
+- **Status / disponibilidad** → marquee `.hire-strip` + sidebar `// status`.
+
+---
+
+## 🧭 Filosofía
+
+> Most AI engineers can wrap an LLM. Few have shipped under IATF 16949 supplier governance.
+
+El portafolio está diseñado para que la primera impresión comunique **rigor de ingeniero**, no slop de IA: terminal estética, métricas reales, war-logs honestos, diagramas que parecen documentación interna. Cada case study sigue la estructura **context → decision → impact** — el formato con el que se escriben los 8D en planta.
+
+---
+
+## 📮 Contacto
+
+Ver sección final del portafolio o sidebar (`// external`). Abierto a roles remotos como **AI Engineer / Founding Engineer**.
+
+---
+
+*Build: HTML estático · cero dependencias de runtime · servido como archivo plano.*
