@@ -5,6 +5,13 @@
 
 ---
 
+## 🌐 Live Deployment
+
+View the live portfolio hosted on Netlify:
+👉 **[https://rodrigostorrecillas.netlify.app](https://rodrigostorrecillas.netlify.app)**
+
+---
+
 ## 📦 Project Content
 
 | File | Description |
@@ -100,7 +107,6 @@ The portfolio is designed so that the first impression communicates **engineerin
 ## 📮 Contact
 
 See the final section of the portfolio or the sidebar (`// external`). Open to remote roles as an **AI Engineer / Founding Engineer**.
-rodrigostorrecillas.netlify.app
 
 ---
 
