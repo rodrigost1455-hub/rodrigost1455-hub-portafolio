@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QualityHub — Rodrigo Santana</title>
+<meta name="description" content="QualityHub: a web quality platform for an automotive plant, built in Python with zero third-party packages. Pilot, in IT security review." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+<link rel="stylesheet" href="../assets/extra.css" />
+</head>
+<body class="detail-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="dbar">
+  <a href="../index.html#projects">← portfolio</a>
+  <span class="path">~/rodrigo/projects/<b>qualityhub</b></span>
+  <a class="spacer" href="../index.html#contact">contact</a>
+</header>
+
+<main class="detail" id="main">
+  <div class="project-kicker">// case study · automotive quality · web platform</div>
+  <h1 class="detail-title">QualityHub — one web platform for the plant's quality work, <span class="accent">built with zero third-party packages</span>.</h1>
+  <p class="detail-lede">Complaints with guided 8D, RMA/scrap, lessons learned, P-Chart/PPM, PCI releases, failure analysis and warranty in one place, replacing scattered Excel workbooks and keeping the plant's official formats.</p>
+  <div class="detail-badges"><span class="badge warn">pilot</span><span class="badge ok">phased rollout approved</span><span class="badge warn">IT review in progress</span></div>
+
+  <section class="d-sec">
+    <h2>problem</h2>
+    <p>Customer complaints, RMA/scrap, lessons learned, PCI releases, failure analysis and warranty data lived in <strong>separate Excel workbooks</strong>. Each one had its own layout and owner, and the official plant formats had to be preserved.</p><p>The first attempt was an Excel macro. It stopped working for a practical reason: <strong>corporate antivirus blocked the .exe</strong>. That constraint pushed the project to the web.</p>
+  </section>
+
+  <section class="d-sec">
+    <h2>solution</h2>
+    <p>A web application the plant can reach from a browser, so there is <strong>nothing to install on any PC</strong>. Users, roles and sessions are handled by a Python web server; every action goes through an engine with a <strong>fixed list of commands</strong>; data lives in <strong>one SQLite database per department</strong>, with a nightly backup that is verified.</p><figure class="d-fig"><div class="arch-svg-wrap"><svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QualityHub architecture: browser to Python web server to a fixed-command engine to one SQLite database per department, with a verified nightly backup"><defs><marker id="arrQd" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#4ade80"/></marker></defs><g><rect class="node-box" x="14" y="40" width="96" height="40" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="62.0" y="58.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">browser</text><text x="62.0" y="70.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">no install on PCs</text></g><g><rect class="node-box" x="134" y="40" width="112" height="40" fill="#161b1a" stroke="#4ade80"/><text class="node-label" x="190.0" y="58.0" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono" font-size="10">web server · python</text><text x="190.0" y="70.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">users · roles · sessions</text></g><g><rect class="node-box" x="134" y="130" width="112" height="40" fill="#0f1313" stroke="#4ade80"/><text class="node-label" x="190.0" y="148.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">command engine</text><text x="190.0" y="160.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">fixed command list</text></g><g><rect class="node-box" x="268" y="100" width="80" height="34" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="308.0" y="115.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">sqlite</text><text x="308.0" y="127.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">dept A</text></g><g><rect class="node-box" x="268" y="142" width="80" height="34" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="308.0" y="157.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">sqlite</text><text x="308.0" y="169.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">dept B</text></g><g><rect class="node-box" x="268" y="184" width="80" height="34" fill="#0f1313" stroke="#1f2826" stroke-dasharray="3 3"/><text class="node-label" x="308.0" y="199.0" text-anchor="middle" fill="#6f817a" font-family="JetBrains Mono" font-size="10">sqlite</text><text x="308.0" y="211.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">dept …</text></g><g><rect class="node-box" x="134" y="214" width="112" height="36" fill="#0f1313" stroke="#fbbf24"/><text class="node-label" x="190.0" y="230.0" text-anchor="middle" fill="#fbbf24" font-family="JetBrains Mono" font-size="10">nightly backup</text><text x="190.0" y="242.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">verified</text></g><path class="flow-path" d="M110,60 L134,60" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrQd)"/><path class="flow-path" d="M190,80 L190,130" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrQd)"/><path class="flow-path" d="M246,142 L268,122" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrQd)"/><path class="flow-path" d="M246,152 L268,158" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrQd)"/><path d="M246,160 L268,200" stroke="#2d3a37" stroke-width="1" fill="none" stroke-dasharray="3 3"/><path class="flow-path" d="M190,170 L190,214" stroke="#fbbf24" stroke-width="1" fill="none" marker-end="url(#arrQd)"/><text x="14" y="270" fill="#6f817a" font-family="JetBrains Mono" font-size="9">// 1 inbound port · 0 CDN · 0 third-party packages</text></svg></div><figcaption>Request path. One inbound port, no CDN, no third-party packages.</figcaption></figure>
+  </section>
+
+  <section class="d-sec">
+    <h2>modules</h2>
+    <table class="d-table"><thead><tr><th>Module</th><th>What it does</th></tr></thead><tbody>
+      <tr><td>Complaints + 8D</td><td>Customer complaints with a guided 8D, in the official format.</td></tr>
+      <tr><td>RMA / scrap</td><td>Returns and scrap tracked in the same system as the complaint.</td></tr>
+      <tr><td>Lessons learned</td><td>A searchable record instead of a workbook someone has to remember.</td></tr>
+      <tr><td>P-Chart / PPM</td><td>P-Chart with a monthly UCL and daily data capture.</td></tr>
+      <tr><td>PCI releases</td><td>Release records kept with the rest of the quality evidence.</td></tr>
+      <tr><td>Failure analysis</td><td>A 48-hour deadline per part.</td></tr>
+      <tr><td>Warranty</td><td>Warranty cases alongside complaints and failure analysis.</td></tr>
+      <tr><td>LPA audits</td><td>Layered process audit records.</td></tr>
+      <tr><td>Alerts</td><td>E-mail alerts when a 3D or 8D is overdue.</td></tr>
+    </tbody></table><figure class="d-fig"><img src="../assets/demo-pchart.svg" alt="Demo P-Chart with one point above the upper control limit" loading="lazy" /><figcaption><b>Demo data (synthetic).</b> Illustration of the P-Chart module's logic (daily capture, monthly UCL). It is not plant data.</figcaption></figure>
+  </section>
+
+  <section class="d-sec">
+    <h2>security</h2>
+    <table class="d-table"><thead><tr><th>Control</th><th>Detail</th></tr></thead><tbody>
+      <tr><td>Password hashing</td><td class="num">PBKDF2-SHA256 · 600,000 iterations</td></tr>
+      <tr><td>Brute force</td><td class="num">lockout after 5 attempts</td></tr>
+      <tr><td>Sessions</td><td>HttpOnly and SameSite cookies; CSRF protection</td></tr>
+      <tr><td>Access control</td><td class="num">7 roles</td></tr>
+      <tr><td>Traceability</td><td>Audit log</td></tr>
+      <tr><td>Browser hardening</td><td>Content-Security-Policy; no CDN</td></tr>
+      <tr><td>Attack surface</td><td>One inbound port; no pip/npm packages</td></tr>
+      <tr><td>Size</td><td class="num">~25,000 lines of code</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="d-sec">
+    <h2>status</h2>
+    <div class="d-callout"><strong>Honest status.</strong> Approved by management to go to production in phases. Currently in architecture and cybersecurity review with IT, running as a controlled pilot inside Quality. It is <strong>not</strong> in production across the plant.</div>
+    <!-- TODO(rodrigo): add measurable impact (hours saved, 8D closure time, number of users, records migrated) once you have validated numbers. -->
+  </section>
+
+  <section class="d-sec">
+    <h2>what I learned</h2>
+    <ul><li>A blocked .exe is a design requirement: the move from an Excel macro to a web app came from what IT would actually allow.</li><li>The dependency-free architecture was designed to make the security review easier: less to audit, fewer things to patch.</li><li>Keeping the plant's official formats meant the tool had to fit the process, not the other way around.</li></ul>
+  </section>
+
+  <section class="d-sec">
+    <h2>stack</h2>
+    <div class="ps-tags" style="margin-top:6px;"><span class="ps-tag hl">Python</span><span class="ps-tag hl">SQLite</span><span class="ps-tag">HTML / JS</span><span class="ps-tag">PBKDF2-SHA256</span><span class="ps-tag">CSRF</span><span class="ps-tag">CSP</span><span class="ps-tag">RBAC (7 roles)</span><span class="ps-tag">SMTP alerts</span></div>
+  </section>
+
+  <nav class="d-nav" aria-label="Other case studies">
+    <span></span>
+    <a href="../index.html#projects">all case studies</a>
+    <a href="yia.html">YIA · RAG assistant →</a>
+  </nav>
+  <p class="detail-foot">Confidentiality: no part numbers, customers, people, internal line names, real logs or real screenshots appear on this site. Charts are labeled demo data.</p>
+</main>
+</body>
+</html>

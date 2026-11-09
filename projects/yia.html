@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YIA — RAG quality assistant — Rodrigo Santana</title>
+<meta name="description" content="YIA: a retrieval-augmented assistant for quality documents that cites its source or says it does not know. Prototype in Python, Streamlit and NumPy, no AI frameworks." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+<link rel="stylesheet" href="../assets/extra.css" />
+</head>
+<body class="detail-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="dbar">
+  <a href="../index.html#projects">← portfolio</a>
+  <span class="path">~/rodrigo/projects/<b>yia</b></span>
+  <a class="spacer" href="../index.html#contact">contact</a>
+</header>
+
+<main class="detail" id="main">
+  <div class="project-kicker">// case study · retrieval-augmented generation · quality documents</div>
+  <h1 class="detail-title">YIA — a RAG assistant that <span class="accent">cites its source</span> or says it doesn't know.</h1>
+  <p class="detail-lede">It searches quality documents first (work instructions, control plans, complaints, lessons learned) and only then writes the answer, citing where it came from.</p>
+  <div class="detail-badges"><span class="badge warn">prototype</span><span class="badge warn">proof of concept</span><span class="badge warn">IT review in progress</span></div>
+
+  <section class="d-sec">
+    <h2>problem</h2>
+    <p>The answer to most quality questions already exists in a work instruction, a control plan, a past complaint or a lessons-learned entry. Finding it is slow, and a chatbot that answers from general knowledge is dangerous in a plant: <strong>an invented value looks exactly like a real one</strong>.</p>
+  </section>
+
+  <section class="d-sec">
+    <h2>solution</h2>
+    <p>YIA retrieves first and writes second. Documents are read and split into chunks, turned into embeddings, and searched by similarity. The <strong>top 8 fragments</strong> go to the model, which may answer <strong>only from those fragments</strong> and must cite the source. If nothing relevant is found, it says so.</p><p>It is plain Python + Streamlit + NumPy, with <strong>no third-party AI frameworks</strong>, in about 2,900 lines.</p><figure class="d-fig"><div class="arch-svg-wrap"><svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YIA RAG pipeline: documents are chunked, embedded and indexed; a question retrieves the top 8 fragments and the answer is written only from them with the source cited, otherwise it says nothing was found"><defs><marker id="arrYd" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#4ade80"/></marker></defs><g><rect class="node-box" x="14" y="30" width="84" height="40" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="56.0" y="48.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">documents</text><text x="56.0" y="60.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">WIs · CPs · 8Ds</text></g><g><rect class="node-box" x="114" y="30" width="70" height="40" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="149.0" y="48.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">chunks</text><text x="149.0" y="60.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">split</text></g><g><rect class="node-box" x="200" y="30" width="70" height="40" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="235.0" y="48.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">embeddings</text><text x="235.0" y="60.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">vectors</text></g><g><rect class="node-box" x="286" y="30" width="62" height="40" fill="#0f1313" stroke="#4ade80"/><text class="node-label" x="317.0" y="48.0" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono" font-size="10">index</text><text x="317.0" y="60.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">numpy</text></g><g><rect class="node-box" x="14" y="118" width="84" height="40" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="56.0" y="136.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">question</text><text x="56.0" y="148.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">user</text></g><g><rect class="node-box" x="150" y="118" width="120" height="40" fill="#161b1a" stroke="#4ade80"/><text class="node-label" x="210.0" y="136.0" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono" font-size="10">similarity search</text><text x="210.0" y="148.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">top 8 fragments</text></g><g><rect class="node-box" x="150" y="196" width="120" height="44" fill="#0f1313" stroke="#4ade80"/><text class="node-label" x="210.0" y="216.0" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono" font-size="10">answer from fragments</text><text x="210.0" y="228.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">cites the source</text></g><g><rect class="node-box" x="286" y="204" width="62" height="36" fill="#0f1313" stroke="#fbbf24"/><text class="node-label" x="317.0" y="220.0" text-anchor="middle" fill="#fbbf24" font-family="JetBrains Mono" font-size="10">not found</text><text x="317.0" y="232.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">says so</text></g><path class="flow-path" d="M98,50 L114,50" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrYd)"/><path class="flow-path" d="M184,50 L200,50" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrYd)"/><path class="flow-path" d="M270,50 L286,50" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrYd)"/><path class="flow-path" d="M317,70 L317,138 L270,138" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrYd)"/><path class="flow-path" d="M98,138 L150,138" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrYd)"/><path class="flow-path" d="M210,158 L210,196" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrYd)"/><path d="M270,150 L317,150 L317,204" stroke="#fbbf24" stroke-width="1" fill="none" stroke-dasharray="3 3"/><text x="14" y="270" fill="#6f817a" font-family="JetBrains Mono" font-size="9">// answer = only the retrieved fragments · no fragment → no answer</text></svg></div><figcaption>Indexing (top) and answering (bottom). The answer is built from retrieved fragments only.</figcaption></figure>
+  </section>
+
+  <section class="d-sec">
+    <h2>evaluation</h2>
+    <p>I built my own test set instead of judging it by eye.</p><table class="d-table"><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody>
+      <tr><td>Questions with exact data</td><td class="num">42 / 42 correct</td></tr>
+      <tr><td>Correct source cited</td><td class="num">42 / 42</td></tr>
+      <tr><td>Out-of-scope questions rejected</td><td class="num">14 / 14</td></tr>
+      <tr><td>Questions in the set</td><td class="num">61</td></tr>
+    </tbody></table>
+    <!-- TODO(rodrigo): 42 + 14 = 56, not 61. Confirm what the other 5 questions are and whether they belong in the table. -->
+    <div class="d-callout"><strong>Limits.</strong> It sometimes adds detail that the document does not actually say, and it does not read images. The evaluation is self-run and small.</div>
+  </section>
+
+  <section class="d-sec">
+    <h2>status</h2>
+    <div class="d-callout"><strong>Honest status.</strong> A prototype (proof of concept) running in the cloud on <strong>de-identified documents</strong>, in review with IT. It is not a production product.</div>
+  </section>
+
+  <section class="d-sec">
+    <h2>what I learned</h2>
+    <ul><li>Rejecting out-of-scope questions is a feature that needs its own tests, not a side effect.</li><li>Restricting the model to retrieved fragments turns "is it right?" into "does the cited source say it?".</li><li>Publishing the known failure modes next to the score makes the score credible.</li></ul>
+  </section>
+
+  <section class="d-sec">
+    <h2>stack</h2>
+    <div class="ps-tags" style="margin-top:6px;"><span class="ps-tag hl">Python</span><span class="ps-tag hl">NumPy</span><span class="ps-tag hl">Streamlit</span><span class="ps-tag">embeddings</span><span class="ps-tag">cosine similarity</span><span class="ps-tag">top-k retrieval</span><span class="ps-tag">LLM generation</span></div>
+  </section>
+
+  <nav class="d-nav" aria-label="Other case studies">
+    <a href="qualityhub.html">← QualityHub</a>
+    <a href="../index.html#projects">all case studies</a>
+    <a href="eol-validation.html">EOL validation →</a>
+  </nav>
+  <p class="detail-foot">Confidentiality: no part numbers, customers, people, internal line names, real logs or real screenshots appear on this site. Charts are labeled demo data.</p>
+</main>
+</body>
+</html>

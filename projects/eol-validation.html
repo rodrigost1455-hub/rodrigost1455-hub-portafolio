@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EOL validation with test-log data science — Rodrigo Santana</title>
+<meta name="description" content="Case study: log parsers, Cpk analysis and paired regression exposed a systematic -0.47 ohm bias at an end-of-line test station, and a calibration gap in the LCR meter." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+<link rel="stylesheet" href="../assets/extra.css" />
+</head>
+<body class="detail-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="dbar">
+  <a href="../index.html#projects">← portfolio</a>
+  <span class="path">~/rodrigo/projects/<b>eol-validation</b></span>
+  <a class="spacer" href="../index.html#contact">contact</a>
+</header>
+
+<main class="detail" id="main">
+  <div class="project-kicker">// case study · data science for test validation</div>
+  <h1 class="detail-title">A <span class="accent">−0.47&nbsp;Ω</span> bias hiding behind a Cpk of 0.47.</h1>
+  <p class="detail-lede">Problem → method → finding → impact: how test-log analytics showed that an EOL station was biased, and why a calibration certificate was not enough.</p>
+  <div class="detail-badges"><span class="badge demo">case study</span><span class="badge demo">demo data on this page</span><span class="badge ok">root cause sent to Metrology</span></div>
+
+  <section class="d-sec">
+    <h2>problem</h2>
+    <p>An end-of-line (EOL) test station was <strong>rejecting good parts</strong>. On top of that, one line showed a <strong>Cpk of 0.47</strong> on the same resistance that another line measured at a <strong>Cpk of 1.5</strong>. Same part, same requirement, very different capability: either the process or the measurement was different.</p>
+  </section>
+
+  <section class="d-sec">
+    <h2>method</h2>
+    <ul><li>Python parsers for <strong>two different log formats</strong>, writing to one common output schema.</li><li>Detection of <strong>overload sentinel values</strong> (9.9E37) so they cannot be mistaken for real measurements.</li><li>A <strong>Power BI dashboard</strong>: Cp/Cpk, scatter with limits, histogram with normal curve.</li><li>Analysis line by line, then <strong>bench measurements paired by serial number</strong>.</li></ul><figure class="d-fig"><div class="arch-svg-wrap"><svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EOL validation pipeline: two log formats parsed into one schema, sentinel values detected, Power BI dashboard, paired bench measurements and regression, root cause sent to Metrology"><defs><marker id="arrEd" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#4ade80"/></marker></defs><g><rect class="node-box" x="14" y="24" width="96" height="36" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="62.0" y="40.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">log format A</text><text x="62.0" y="52.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">raw test logs</text></g><g><rect class="node-box" x="14" y="74" width="96" height="36" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="62.0" y="90.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">log format B</text><text x="62.0" y="102.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">raw test logs</text></g><g><rect class="node-box" x="134" y="44" width="100" height="46" fill="#161b1a" stroke="#4ade80"/><text class="node-label" x="184.0" y="65.0" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono" font-size="10">parsers (python)</text><text x="184.0" y="77.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">one output schema</text></g><g><rect class="node-box" x="254" y="44" width="94" height="46" fill="#0f1313" stroke="#fbbf24"/><text class="node-label" x="301.0" y="65.0" text-anchor="middle" fill="#fbbf24" font-family="JetBrains Mono" font-size="10">sentinel check</text><text x="301.0" y="77.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">9.9E37 overload</text></g><g><rect class="node-box" x="134" y="132" width="214" height="40" fill="#0f1313" stroke="#4ade80"/><text class="node-label" x="241.0" y="150.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">power bi dashboard</text><text x="241.0" y="162.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">Cp/Cpk · scatter + limits · histogram</text></g><g><rect class="node-box" x="14" y="196" width="130" height="40" fill="#0f1313" stroke="#2d3a37"/><text class="node-label" x="79.0" y="214.0" text-anchor="middle" fill="#d6e0dc" font-family="JetBrains Mono" font-size="10">bench, paired by SN</text><text x="79.0" y="226.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">n=46 + 2nd sample</text></g><g><rect class="node-box" x="168" y="196" width="180" height="40" fill="#0f1313" stroke="#4ade80"/><text class="node-label" x="258.0" y="214.0" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono" font-size="10">regression + tests</text><text x="258.0" y="226.0" text-anchor="middle" fill="#8a9a94" font-family="JetBrains Mono" font-size="8">offset vs gain → Metrology</text></g><path class="flow-path" d="M110,42 L134,60" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrEd)"/><path class="flow-path" d="M110,92 L134,76" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrEd)"/><path class="flow-path" d="M234,67 L254,67" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrEd)"/><path class="flow-path" d="M301,90 L301,132" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrEd)"/><path class="flow-path" d="M241,172 L241,196" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrEd)"/><path class="flow-path" d="M144,216 L168,216" stroke="#4ade80" stroke-width="1" fill="none" marker-end="url(#arrEd)"/><text x="14" y="270" fill="#6f817a" font-family="JetBrains Mono" font-size="9">// demo shapes only · no plant data on this page</text></svg></div><figcaption>Pipeline from raw logs to a root cause the metrology team can act on.</figcaption></figure><figure class="d-fig"><img src="../assets/demo-eol-cpk.svg" alt="Demo histograms of two lines measuring the same resistance, one with Cpk about 0.47 and one about 1.5" loading="lazy" /><figcaption><b>Demo data (synthetic).</b> Two lines, same resistance and limits, shifted by a constant offset. Cpk values are computed from the synthetic samples.</figcaption></figure>
+  </section>
+
+  <section class="d-sec">
+    <h2>finding 1 · a station bias</h2>
+    <p>One station read <strong>about −0.47 Ω low</strong>. The bench comparison on the same parts confirmed it, and a second, independent sample taken weeks later agreed.</p>
+    <table class="d-table"><thead><tr><th>Evidence</th><th>Result</th></tr></thead><tbody>
+      <tr><td>Paired bench measurements (by serial number)</td><td class="num">n = 46 · r = 0.83</td></tr>
+      <tr><td>Regression slope vs 1</td><td class="num">indistinguishable (p = 0.96)</td></tr>
+      <tr><td>Interpretation</td><td>An <strong>additive offset</strong>, not a gain error</td></tr>
+      <tr><td>Ruled out</td><td>Bad contact, assembly stress, single-channel faults</td></tr>
+      <tr><td>Replication</td><td>Second independent sample, weeks later</td></tr>
+    </tbody></table><figure class="d-fig"><img src="../assets/demo-eol-scatter.svg" alt="Demo scatter of station readings against bench readings showing a constant offset below the identity line" loading="lazy" /><figcaption><b>Demo data (synthetic).</b> Synthetic points generated with the same shape as the finding (n=46, r≈0.83, slope≈1, offset ≈ −0.47 Ω).</figcaption></figure>
+  </section>
+
+  <section class="d-sec">
+    <h2>finding 2 · calibration vs validation</h2>
+    <p>The calibration certificate of the LCR meter covered standard points, but <strong>never the real operating range</strong> of the parts (~27 Ω and ~90–100 nF). The instrument was calibrated, and still had not been validated where it was used.</p>
+  </section>
+
+  <section class="d-sec">
+    <h2>what it demonstrates</h2>
+    <ul><li><strong>Applied statistics:</strong> Cpk, regression and hypothesis tests used to separate a gain error from an offset.</li><li><strong>Data-pipeline design:</strong> two formats, one schema, with bad values caught early.</li><li><strong>Communication:</strong> a root cause handed to Metrology with evidence.</li></ul>
+    <!-- TODO(rodrigo): add measured impact (false-reject rate before/after, scrap avoided, time saved) if you have validated numbers. -->
+  </section>
+
+  <section class="d-sec">
+    <h2>what I learned</h2>
+    <ul><li>Calibrating is not the same as validating at the point of use.</li><li>When two lines disagree on a Cpk, check the measurement system before touching the process.</li><li>A second independent sample is cheap and turns a suspicion into a finding.</li></ul>
+  </section>
+
+  <section class="d-sec">
+    <h2>stack</h2>
+    <div class="ps-tags" style="margin-top:6px;"><span class="ps-tag hl">Python</span><span class="ps-tag hl">Power BI</span><span class="ps-tag">Cp / Cpk</span><span class="ps-tag">linear regression</span><span class="ps-tag">hypothesis tests</span><span class="ps-tag">log parsing</span></div>
+  </section>
+
+  <nav class="d-nav" aria-label="Other case studies">
+    <a href="yia.html">← YIA · RAG assistant</a>
+    <a href="../index.html#projects">all case studies</a>
+    <span></span>
+  </nav>
+  <p class="detail-foot">Confidentiality: no part numbers, customers, people, internal line names, real logs or real screenshots appear on this site. Charts are labeled demo data.</p>
+</main>
+</body>
+</html>
